@@ -1,4 +1,4 @@
-import { Schema, model, Document } from "mongoose";
+import { Schema, model, models, Document } from "mongoose";
 
 export interface IVersion extends Document {
   versionId: string;
@@ -21,6 +21,6 @@ const VersionSchema = new Schema<IVersion>({
   },
 });
 
-const Version = model<IVersion>("Version", VersionSchema);
+const Version = models.Version || model<IVersion>("Version", VersionSchema);
 
 export { VersionSchema, Version };

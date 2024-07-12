@@ -1,4 +1,4 @@
-import { Schema, model, Document } from "mongoose";
+import { Schema, model, models, Document } from "mongoose";
 import { CommentSchema, IComment } from "./comments";
 import { VersionSchema, IVersion } from "./version";
 
@@ -52,7 +52,7 @@ const SnippetSchema = new Schema<ISnippet>({
   visibility: {
     type: String,
     enum: ["public", "private"],
-    default: "public",
+    default: "private",
   },
   forkCount: {
     type: Number,
@@ -95,6 +95,6 @@ const SnippetSchema = new Schema<ISnippet>({
   },
 });
 
-const Snippet = model<ISnippet>("Snippet", SnippetSchema);
+const Snippet = models.Snippet || model<ISnippet>("Snippet", SnippetSchema);
 
 export { Snippet };

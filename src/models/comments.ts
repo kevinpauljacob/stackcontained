@@ -1,4 +1,4 @@
-import { Schema, model, Document } from "mongoose";
+import { Schema, model, models, Document } from "mongoose";
 
 export interface IComment extends Document {
   userId: Schema.Types.ObjectId;
@@ -22,6 +22,6 @@ const CommentSchema = new Schema<IComment>({
   },
 });
 
-const Comment = model<IComment>("Comment", CommentSchema);
+const Comment = models.Comment || model<IComment>("Comment", CommentSchema);
 
 export { CommentSchema, Comment };
