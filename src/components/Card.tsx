@@ -7,14 +7,12 @@ import { LiaCommentSolid } from "react-icons/lia";
 import { GoEye } from "react-icons/go";
 import { FiCopy } from "react-icons/fi";
 
-export default function Card() {
+export default function Card({ snippet, onClick }: any) {
   const { modalActive, setModalActive } = useAppContext();
   return (
     <div
       className="relative flex flex-col justify-between bg-secondary/80 rounded-lg drop-shadow-xl hover:bg-secondary/50 transition duration-300 ease-in-out hover:transition hover:duration-300 hover:ease-in-out p-4 min-h-[250px]"
-      onClick={() => {
-        setModalActive(true);
-      }}
+      onClick={onClick}
     >
       <div className="mb-2">
         <div className="flex items-center justify-between mb-3">
@@ -30,22 +28,19 @@ export default function Card() {
             </div>
           </div>
         </div>
-        <h3 className="text-lg mb-1">Fetch API Response</h3>
+        <h3 className="text-lg mb-1">{snippet.title}</h3>
         <div className="flex gap-2 my-3">
-          <span className="bg-accent1 text-black text-xs font-semibold rounded-md px-2 py-1">
-            Code
-          </span>
-          <span className="bg-accent1 text-black text-xs font-semibold rounded-md px-2 py-1">
-            Java
-          </span>
-          <span className="bg-accent1 text-black text-xs font-semibold rounded-md px-2 py-1">
-            Script
-          </span>
+          {snippet.tags.map((tag: string, index: number) => (
+            <span
+              key={index}
+              className="bg-accent1 text-black text-xs font-semibold rounded-md px-2 py-1"
+            >
+              {tag}
+            </span>
+          ))}
         </div>
         <p className="text-sm text-ellipsis text-white/80">
-          The Fetch API provides an interface for fetching resources (including
-          across the network). It will seem familiar to anyone who has used the
-          Fetch API directly in JavaScript.
+          {snippet.description}
         </p>
       </div>
       <div className="flex justify-between gap-2">
